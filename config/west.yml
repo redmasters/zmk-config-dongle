@@ -1,7 +1,9 @@
 manifest:
+  defaults:
+    remote: urob
 
   remotes:
-    - name: zmkfirmware
+    - name: upstream
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
@@ -18,7 +20,7 @@ manifest:
       revision: main
       path: modules/auto-layer
 
-    - name: zmk-modular
+    - name: zmk
       revision: going-modular
       path: .
       import:
