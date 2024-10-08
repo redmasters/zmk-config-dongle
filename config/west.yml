@@ -18,7 +18,7 @@ manifest:
       revision: main
       path: modules/auto-layer
 
-     - name: zmk
+    - name: zmk-modular
       revision: going-modular
       path: .
       import:
