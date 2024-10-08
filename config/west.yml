@@ -4,7 +4,7 @@ manifest:
     remote: urob
 
   remotes:
-    - name: upstream
+    - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
