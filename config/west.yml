@@ -11,8 +11,8 @@ manifest:
 
   projects:
     - name: zmk-helpers
-      revision: main
-      path: modules/helpers
+      remote: urob
+      revision: main 
     - name: zmk-auto-layer
       revision: main
       path: modules/auto-layer
@@ -23,11 +23,8 @@ manifest:
     # ZMK with Zephyr namespaced under /zmk. This requires that ZMK imports
     # Zephyr with a path other than `zephyr` (as in `going-modular`).
     - name: zmk
-      revision: going-modular
-      path: .
-      import:
-        file: app/west.yml
-        path-prefix: zmk
-
+      remote: zmkfirmware
+      revision: main
+      import: app/west.yml
   self:
     path: config
