@@ -70,7 +70,6 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 
 /*Mouse, combos */
 #include "mouse.dtsi"
-#include "combos.dtsi"
 
 #define MT_CORE \
     flavor = "tap-preferred"; \
