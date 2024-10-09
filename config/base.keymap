@@ -2,6 +2,7 @@
 #include <behaviors/num_word.dtsi> // requires auto-layer module
 #include <dt-bindings/zmk/keys.h>
 #include "zmk-helpers/helper.h"
+#include <dt-bindings/zmk/outputs.h>
 
 #ifdef CONFIG_WIRELESS
     #include <dt-bindings/zmk/bt.h>
@@ -10,7 +11,8 @@
     #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
 #endif
 
-
+// Output: Bluetooth/USB
+#define _OUT_TOG_ &out OUT_TOG
 
 #define DEF 0
 #define NAV 1
@@ -206,7 +208,7 @@ ZMK_LAYER(base,
 &kp ESCAPE   &kp Q  &kp W             &kp E               &kp R           &kp T             &mt LS(F6) Y    &kp U           &kp I                 &mt LS(F9) O      &kp P          &kp BSPC
 &kp TAB      &kp A  &hml LEFT_SHIFT S  &hml LEFT_CONTROL D  &hml LEFT_ALT F  &hml LEFT_GUI G    &hmr LEFT_GUI H  &hmr LEFT_ALT J  &hmr LEFT_CONTROL K    &hmr LEFT_SHIFT L  &kp SEMICOLON  &kp SQT
 &kp LCTRL    &kp Z  &kp X             &kp C               &kp V           &kp B             &kp N           &kp M           &kp COMMA             &kp DOT           &kp FSLH       &kp ENTER
-                                     &lt FN ESC           &lt NAV LEFT_GUI  &kp TAB         &kp RET       &lt NUM SPACE     &bs_del_num
+                                     &lt FN ESC           &lt NAV LEFT_GUI  &lt &smart_shft TAB         &kp RET       &lt NUM SPACE     &bs_del_num
 )
 
 ZMK_LAYER(nav,
@@ -218,8 +220,8 @@ ZMK_LAYER(nav,
 )
 
 ZMK_LAYER(fn,
-&kp F12  &kp F7  &kp F8  &kp F9  &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans
-&kp F11  &kp F4  &kp F5  &kp F6  &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans
+&kp F12  &kp F7  &kp F8  &kp F9  &trans     &trans          &trans           &trans    &trans          &trans  &trans  &trans
+&kp F11  &kp F4  &kp F5  &kp F6  &trans     &trans          &kp C_MUTE       VOL_DOWN  &kp C_VOL_UP    &trans  &trans  &trans
 &kp F10  &kp F1  &kp F2  &kp F3  &trans     &trans          &kp PRINTSCREEN  &trans  &trans  &trans  &trans  &trans
                          &trans  &kp LCTRL  &kp LEFT_ALT    &trans           &trans  &trans
 )
@@ -233,9 +235,9 @@ ZMK_LAYER(num,
 )
 
 ZMK_LAYER(sys,
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_CLR    &bt BT_CLR_ALL
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_SEL 2  &bt BT_SEL 3
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_SEL 0  &bt BT_SEL 1
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_CLR_ALL _OUT_TOG_
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  _BT_SEL_KEYS_  &trans
                         &trans  &trans  &trans    &trans  &trans  &trans
 
 )
