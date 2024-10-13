@@ -174,8 +174,8 @@ ZMK_TAP_DANCE(copy_cut,
 )
 
 // tap: backspace | shift + tap: delete | hold: num layer
-ZMK_MOD_MORPH(bs_del_num,
-    bindings = <&lt NUM BSPC>, <&kp DEL>;
+ZMK_MOD_MORPH(bs_del,
+    bindings = <&kp BSPC>, <&kp DEL>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
@@ -197,8 +197,6 @@ ZMK_TRI_STATE(swapper,
 ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, NAV)  // put Windows to sleep, only active on NAV layer
 ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
 ZMK_COMBO(paste,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
-ZMK_COMBO(dota,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
-
 
 
 /*Keymap*/
@@ -209,8 +207,8 @@ ZMK_LAYER(base,
 //╭──────────┬──────┬──
 &kp ESCAPE   &kp Q  &kp W             &kp E               &kp R           &kp T             &mt LS(F6) Y    &kp U           &kp I                 &mt LS(F9) O      &kp P          &kp BSPC
 &kp TAB      &kp A  &hml LEFT_SHIFT S  &hml LEFT_CONTROL D  &hml LEFT_ALT F  &hml LEFT_GUI G    &hmr LEFT_GUI H  &hmr LEFT_ALT J  &hmr LEFT_CONTROL K    &hmr LEFT_SHIFT L  &kp SEMICOLON  &kp SQT
-&kp LCTRL    &kp Z  &kp X             &kp C               &kp V           &kp B             &kp N           &kp M           &kp COMMA             &kp DOT           &kp FSLH       &kp ENTER
-                                     &lt FN ESC           &lt NAV LEFT_GUI  &lt &smart_shft TAB         &kp RET       &lt NUM SPACE     &bs_del_num
+&kp LCTRL    &kp Z  &kp X             &kp C               &kp V           &kp B             &kp N           &kp M           &kp COMMA             &kp DOT           &kp FSLH       &smart_shft
+                                     &lt FN ESC           &lt NAV LEFT_GUI  &lt &smart_shft TAB         &kp RET       &lt NUM SPACE     &bs_del
 )
 
 ZMK_LAYER(nav,
@@ -222,10 +220,10 @@ ZMK_LAYER(nav,
 )
 
 ZMK_LAYER(fn,
-&kp F12  &kp F7  &kp F8  &kp F9  &trans     &trans          &trans           &trans    &trans          &trans  &trans  &trans
-&kp F11  &kp F4  &kp F5  &kp F6  &trans     &trans          &kp C_MUTE       VOL_DOWN  &kp C_VOL_UP    &trans  &trans  &trans
-&kp F10  &kp F1  &kp F2  &kp F3  &trans     &trans          &kp PRINTSCREEN  &trans  &trans  &trans  &trans  &trans
-                         &trans  &kp LCTRL  &kp LEFT_ALT    &trans           &trans  &trans
+&kp F12  &kp F7  &kp F8  &kp F9  &trans     &trans          &trans           &trans    &trans   &trans  &trans  &trans
+&kp F11  &kp F4  &kp F5  &kp F6  &trans     &trans          &trans           &trans    &trans   &trans  &trans  &trans
+&kp F10  &kp F1  &kp F2  &kp F3  &trans     &trans          &kp PRINTSCREEN  VOL_DOWN &kp C_VOL_UP &trans  &trans  &trans
+                         &trans  &kp LCTRL  &kp LEFT_ALT    &kp C_MUTE &trans  &trans
 )
 
 ZMK_LAYER(num,
