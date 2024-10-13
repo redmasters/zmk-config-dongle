@@ -22,6 +22,7 @@
 #define MOUSE 5
 #define GAME 6
 #define FUNGAME 7
+#define DOTA 8
 
 #define XXX &none
 #define ___ &trans
@@ -196,6 +197,7 @@ ZMK_TRI_STATE(swapper,
 ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, NAV)  // put Windows to sleep, only active on NAV layer
 ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
 ZMK_COMBO(paste,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
+ZMK_COMBO(dota,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
 
 
 
@@ -267,4 +269,11 @@ ZMK_LAYER(fungame,
 &trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &trans  &trans  &trans  &trans  &trans  &trans
                                    &trans  &trans  &trans     &trans  &trans  &trans
 
+)
+
+ZMK_LAYER(dota,
+&trans        &kp Q  &kp W             &kp E           &kp R        &kp T      &kp Y   &kp U   &kp I      &kp O    &kp P     &trans
+&trans        &kp A  &mt LEFT_SHIFT S  &mt LCTRL D     &mt LALT F   &kp G      &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
+&kp LEFT_ALT  &kp Z  &kp X             &kp C           &kp V        &kp B      &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &trans
+                                       &kp LEFT_SHIFT  &lt FUNGAME SPACE  &kp TAB    &trans  &trans  &trans
 )

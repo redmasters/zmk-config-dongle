@@ -1,0 +1,242 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+// Layer definitions
+
+#define BASE 0
+#define NAV  1
+#define NUM 2
+#define FUN 3
+#define SYS 4
+#define MOUSE 5
+#define NUMPAD 6
+#define DOTA 7
+#define FN_DOTA 8
+
+// long-tap action on hold, short-tap action on all interrupts
+
+&mt {
+    flavor = "tap-preferred";
+    tapping-term-ms = <220>;
+    quick-tap-ms = <220>;
+    hold-trigger-key-positions = <0>;
+    require-prior-idle-ms = <125>;
+};
+
+&sk { ignore-modifiers; };
+
+/ {
+    behaviors {
+        td0: td0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD0";
+            #binding-cells = <0>;
+            bindings = <&kp N>, <&kp LS(INS)>;
+        };
+
+        copy_paste: copy_paste {
+            compatible = "zmk,behavior-mod-morph";
+            label = "COPY_PASTE";
+            bindings = <&kp LS(INS)>, <&kp LC(INS)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LCTL)>;
+            keep-mods = <(MOD_LCTL)>;
+        };
+
+        a_left_alt: a_left_alt {
+            compatible = "zmk,behavior-tap-dance";
+            label = "A_LEFT_ALT";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp LEFT_ALT>;
+
+            tapping-term-ms = <175>;
+        };
+
+        l_right_alt: l_right_alt {
+            compatible = "zmk,behavior-tap-dance";
+            label = "L_RIGHT_ALT";
+            #binding-cells = <0>;
+            bindings = <&kp L>, <&kp LEFT_ALT>;
+
+            tapping-term-ms = <175>;
+        };
+
+        y_shift_f6: y_shift_f6 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "Y_SHIFT_F6";
+            #binding-cells = <0>;
+            bindings = <&kp Y>, <&kp LS(F6)>;
+
+            tapping-term-ms = <175>;
+        };
+
+        o_shift_f9: o_shift_f9 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "O_SHIFT_F9";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&kp LS(F9)>;
+
+            tapping-term-ms = <175>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        BASE {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
+            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
+            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
+            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+
+            bindings = <
+&kp ESCAPE  &kp Q  &kp W             &kp E               &kp R           &kp T             &mt LS(F6) Y    &kp U           &kp I                 &mt LS(F9) O      &kp P          &kp BSPC
+&kp TAB     &kp A  &mt LEFT_SHIFT S  &mt LEFT_CONTROL D  &mt LEFT_ALT F  &mt LEFT_GUI G    &mt LEFT_GUI H  &mt LEFT_ALT J  &mt LEFT_CONTROL K    &mt LEFT_SHIFT L  &kp SEMICOLON  &kp SQT
+&kp LCTRL   &kp Z  &kp X             &kp C               &kp V           &kp B             &kp N           &kp M           &kp COMMA             &kp DOT           &kp FSLH       &kp ENTER
+                                     &lt 3 ESC           &lt 1 LEFT_GUI  &lt 5 TAB         &kp ENTER       &lt 2 SPACE     &mt DELETE BACKSPACE
+            >;
+
+            display-name = "BASE";
+        };
+
+        NAV {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&kp TILDE         &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &trans    &kp AMPERSAND  &mt LEFT_BRACE LEFT_PARENTHESIS  &mt RIGHT_BRACE RIGHT_PARENTHESIS  &mt UNDER KP_MINUS  &mt PLUS EQUAL
+&trans            &trans    &trans  &trans    &trans      &trans         &kp LEFT  &kp DOWN       &kp UP                           &kp RIGHT                          &trans              &kp PIPE
+&kp LC(LEFT_GUI)  &trans    &trans  &trans    &trans      &trans         &kp INS   &kp HOME       &kp PAGE_DOWN                    &kp PG_UP                          &kp END             &trans
+                                    &trans    &trans      &kp SPACE      &kp RET   &trans         &kp RALT
+            >;
+
+            display-name = "NAV";
+        };
+
+        NUM {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4        &kp N5    &kp N6     &kp N7        &kp N8    &kp N9    &kp N0    &kp BSPC
+&kp LCTRL  &trans  &trans  &trans  &trans        &trans    &kp MINUS  &kp ASTERISK  &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT  &trans  &trans  &trans  &trans        &trans    &tog 6     &kp PLUS      &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
+                           &trans  &kp LEFT_ALT  &trans    &kp RET    &trans        &kp RALT
+            >;
+
+            display-name = "NUM";
+        };
+
+        FUN {
+            bindings = <
+&kp F12  &kp F7  &kp F8  &kp F9  &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans
+&kp F11  &kp F4  &kp F5  &kp F6  &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans
+&kp F10  &kp F1  &kp F2  &kp F3  &trans     &trans          &kp PRINTSCREEN  &trans  &trans  &trans  &trans  &trans
+                         &trans  &kp LCTRL  &kp LEFT_ALT    &trans           &trans  &trans
+            >;
+
+            display-name = "FUN";
+        };
+
+        SYS {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_CLR    &bt BT_CLR_ALL
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_SEL 2  &bt BT_SEL 3
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &bt BT_SEL 0  &bt BT_SEL 1
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+
+            display-name = "SYS";
+        };
+
+        MOUSE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans       &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans       &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &copy_paste  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans       &trans  &trans
+            >;
+
+            display-name = "MOUSE";
+        };
+
+        NUMPAD {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &kp BACKSPACE  &kp N7  &kp N8  &kp N9  &kp MINUS        &kp PLUS
+&trans  &trans  &trans  &trans  &trans  &trans    &kp KP_DOT     &kp N4  &kp N5  &kp N6  &kp KP_ASTERISK  &kp KP_DIVIDE
+&trans  &trans  &trans  &trans  &tog 9  &tog 7    &trans         &kp N1  &kp N2  &kp N3  &trans           &trans
+                        &trans  &trans  &trans    &trans         &trans  &kp N0
+            >;
+
+            display-name = "NUMPAD";
+        };
+
+        DOTA {
+            bindings = <
+&trans        &kp Q  &kp W             &kp E           &kp R        &kp T      &kp Y   &kp U   &kp I      &kp O    &kp P     &trans
+&trans        &kp A  &mt LEFT_SHIFT S  &mt LCTRL D     &mt LALT F   &kp G      &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
+&kp LEFT_ALT  &kp Z  &kp X             &kp C           &kp V        &kp B      &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &trans
+                                       &kp LEFT_SHIFT  &lt 8 SPACE  &kp TAB    &trans  &trans  &trans
+            >;
+
+            display-name = "DOTA";
+        };
+
+        FN_DOTA {
+            bindings = <
+&kp F12  &kp F7  &kp F8  &kp F9  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &tog 7
+&kp F11  &kp F4  &kp F5  &kp F6  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&kp F10  &kp F1  &kp F2  &kp F3  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                         &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+
+            display-name = "FN_DOTA";
+        };
+
+        MBL {
+            bindings = <
+&kp ESC    &kp Q  &kp W  &kp E   &kp R         &kp T      &kp Y      &kp U   &kp I      &kp O    &kp P     &trans
+&kp LSHFT  &kp A  &kp S  &kp D   &kp F         &kp G      &kp H      &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
+&trans     &kp Z  &kp X  &kp C   &kp V         &kp B      &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &trans
+                         &trans  &lt 10 SPACE  &kp TAB    &kp ENTER  &trans  &trans
+            >;
+
+            display-name = "MBL";
+        };
+
+        FN_MBL {
+            bindings = <
+&kp F12  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5     &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &tog 9
+&kp F11  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10    &trans  &trans  &trans  &trans  &trans  &trans
+&trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &trans  &trans  &trans  &trans  &trans  &trans
+                         &trans  &trans  &trans     &trans  &trans  &trans
+            >;
+
+            display-name = "FN_MBL";
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        show_sys {
+            if-layers = <1 2>;
+            then-layer = <4>;
+        };
+    };
+};
