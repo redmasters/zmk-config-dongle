@@ -21,8 +21,8 @@
 #define SYS 4
 #define MOUSE 5
 #define GAME 6
-#define FUNGAME 7
-#define DOTA 8
+#define DOTA 7
+#define FUNGAME 8
 
 #define XXX &none
 #define ___ &trans
@@ -261,17 +261,17 @@ ZMK_LAYER(game,
                                    &trans  &lt FUNGAME SPACE  &kp TAB    &kp ENTER  &trans  &trans
 )
 
-ZMK_LAYER(fungame,
-&kp F12  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5     &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &tog GAME
-&kp F11  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10    &trans  &trans  &trans  &trans  &trans  &trans
-&trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &trans  &trans  &trans  &trans  &trans  &trans
-                                   &trans  &trans  &trans     &trans  &trans  &trans
-
-)
-
 ZMK_LAYER(dota,
 &trans        &kp Q  &kp W             &kp E           &kp R        &kp T      &kp Y   &kp U   &kp I      &kp O    &kp P     &trans
 &trans        &kp A  &mt LEFT_SHIFT S  &mt LCTRL D     &mt LALT F   &kp G      &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
 &kp LEFT_ALT  &kp Z  &kp X             &kp C           &kp V        &kp B      &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &trans
                                        &kp LEFT_SHIFT  &lt FUNGAME SPACE  &kp TAB    &trans  &trans  &trans
 )
+
+ZMK_LAYER(fungame,
+&kp F12  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5     &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &tog GAME
+&kp F11  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10    &trans  &trans  &trans  &trans  &trans  &trans
+&trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &trans  &trans  &trans  &trans  &trans  &trans
+                                   &trans  &trans  &trans     &trans  &trans  &trans
+)
+
