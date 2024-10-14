@@ -13,4 +13,4 @@ tapping the leader key. */
 
 /* pt-br */
 
-ZMK_LEADER_SEQUENCE(pt_c_cedilla,      &pt_c_cedilla,         LH2 LB2)  // 
+ZMK_LEADER_SEQUENCE(pt_c_cedilla, &pt_c_cedilla, LH2 LB2)  //cedilha
