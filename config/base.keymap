@@ -286,10 +286,10 @@ ZMK_LAYER(fungame,
 
 
 ZMK_LAYER(romak,
-&trans  &kp Q     &kp B  &kp M  &kp G      &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y &trans
-&trans &kp D     &kp N  &kp S  &kp T      &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I &trans
-&trans &kp FSLH  &kp F  &kp C  &kp P      &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON &trans
-                   CANCEL &lt ROMAK2 &kp TAB  &kp RET  &lt ROMAK2 SPACE  &bs_del
+ &trans &kp Q     &kp B  &kp M  &kp G      &kp K        &kp X    &kp L      &kp O      &kp U    &kp Y         &trans
+ &trans &kp D     &kp N  &kp S  &kp T      &kp W        &kp Z    &kp R      &kp A      &kp E    &kp I         &trans
+ &trans &kp FSLH  &kp F  &kp C  &kp P      &kp V        &kp J    &kp H      &kp COMMA  &kp DOT  &kp SEMICOLON &trans
+                        &trans  &trans  &kp TAB          &kp RET  &kp SPACE  &trans
 )
 
 // ZMK_LAYER(romak2,
