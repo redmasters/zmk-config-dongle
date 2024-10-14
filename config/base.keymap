@@ -26,7 +26,7 @@
 #define DOTA 7
 #define FUNGAME 8
 #define ROMAK 9
-#define ROMAK2 9
+// #define ROMAK2 9
 
 #define XXX &none
 #define ___ &trans
@@ -286,16 +286,16 @@ ZMK_LAYER(fungame,
 
 
 ZMK_LAYER(romak,
-  &kp Q     &kp B  &kp M  &kp G      &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y
-  &kp D     &kp N  &kp S  &kp T      &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I
-  &kp FSLH  &kp F  &kp C  &kp P      &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON
+&trans  &kp Q     &kp B  &kp M  &kp G      &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y &trans
+&trans &kp D     &kp N  &kp S  &kp T      &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I &trans
+&trans &kp FSLH  &kp F  &kp C  &kp P      &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON &trans
                    CANCEL &lt ROMAK2 &kp TAB  &kp RET  &lt ROMAK2 SPACE  &bs_del
 )
 
-ZMK_LAYER(romak2,
-  &kp Q     &kp B  &kp M  &kp G  &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y
-  &kp D     &kp N  &kp S  &kp T  &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I
-  &kp FSLH  &kp F  &trans  &kp P  &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON
-                   CANCEL &trans &kp TAB  &kp RET  &trans   &bs_del
-)
+// ZMK_LAYER(romak2,
+//   &kp Q     &kp B  &kp M  &kp G  &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y
+//   &kp D     &kp N  &kp S  &kp T  &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I
+//   &kp FSLH  &kp F  &trans  &kp P  &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON
+//                    CANCEL &trans &kp TAB  &kp RET  &trans   &bs_del
+// )
 
