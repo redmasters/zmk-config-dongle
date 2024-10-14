@@ -3,6 +3,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include "zmk-helpers/helper.h"
 #include <dt-bindings/zmk/outputs.h>
+#include "zmk-helpers/unicode-chars/portuguese.dtsi"
+
 
 #ifdef CONFIG_WIRELESS
     #include <dt-bindings/zmk/bt.h>
@@ -23,6 +25,8 @@
 #define GAME 6
 #define DOTA 7
 #define FUNGAME 8
+#define ROMAK 9
+#define ROMAK2 9
 
 #define XXX &none
 #define ___ &trans
@@ -46,9 +50,10 @@
     quick-tap-ms = <QUICK_TAP_MS>;
 };
 
-//&leader {  // leader-key config
-//    timeout-ms = <650>;
-//};
+&leader {  // leader-key config
+   timeout-ms = <650>;
+};
+
 
 
 
@@ -80,6 +85,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 /*Mouse, combos */
 #include "mouse.dtsi"
 #include "combos.dtsi"
+#include "leader.dtsi"
 
 #define MT_CORE \
     flavor = "tap-preferred"; \
@@ -97,6 +103,8 @@ ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
 #define NAV_DOWN  &mt LC(END)  DOWN    // tap: down  | long-tap: end       of document
 #define NAV_BSPC  &mt LC(BSPC) BSPC    // tap: bspc  | long-tap: delete word backward
 #define NAV_DEL   &mt LC(DEL)  DEL
+
+ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
 
 // misc aliases
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
@@ -273,5 +281,21 @@ ZMK_LAYER(fungame,
 &kp F11  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10    &trans  &trans  &trans  &trans  &trans  &trans
 &trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &trans  &trans  &trans  &trans  &trans  &trans
                                    &trans  &trans  &trans     &trans  &trans  &trans
+)
+
+
+
+ZMK_LAYER(romak,
+  &kp Q     &kp B  &kp M  &kp G      &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y
+  &kp D     &kp N  &kp S  &kp T      &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I
+  &kp FSLH  &kp F  &kp C  &kp P      &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON
+                   CANCEL &lt ROMAK2 &kp TAB  &kp RET  &lt ROMAK2 SPACE  &bs_del
+)
+
+ZMK_LAYER(romak2,
+  &kp Q     &kp B  &kp M  &kp G  &kp K    &kp X  &kp L  &kp O      &kp U    &kp Y
+  &kp D     &kp N  &kp S  &kp T  &kp W    &kp Z  &kp R  &kp A      &kp E    &kp I
+  &kp FSLH  &kp F  &trans  &kp P  &kp V    &kp J  &kp H  &kp COMMA  &kp DOT  &kp SEMICOLON
+                   CANCEL &trans &kp TAB  &kp RET  &trans   &bs_del
 )
 
