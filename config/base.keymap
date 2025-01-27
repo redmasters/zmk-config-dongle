@@ -50,9 +50,9 @@
     quick-tap-ms = <QUICK_TAP_MS>;
 };
 
-&leader {  // leader-key config
-   timeout-ms = <650>;
-};
+//&leader {  // leader-key config
+//   timeout-ms = <650>;
+//};
 
 
 
