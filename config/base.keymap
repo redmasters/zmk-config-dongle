@@ -5,6 +5,12 @@
 #include <dt-bindings/zmk/outputs.h>
 #include "zmk-helpers/unicode-chars/portuguese.dtsi"
 
+/*Mouse, combos, leader */
+#include "mouse.dtsi"
+#include "combos.dtsi"
+#include "leader.dtsi"
+
+
 
 #ifdef CONFIG_WIRELESS
     #include <dt-bindings/zmk/bt.h>
@@ -82,10 +88,6 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
     MAKE_HRM(hm_combo_ ## NAME, &kp, TAP, SIDE THUMBS) \
     ZMK_COMBO_6(NAME, &hm_combo_ ## NAME HOLD 0, KEYPOS, LAYERS, COMBO_TERM, COMBO_IDLE)
 
-/*Mouse, combos */
-#include "mouse.dtsi"
-#include "combos.dtsi"
-#include "leader.dtsi"
 
 #define MT_CORE \
     flavor = "tap-preferred"; \
