@@ -289,3 +289,7 @@ include:
   ### SETTINGS_RESET END ###
   - board: nice_nano_v2
     shield: corne_left oled_adapter_pro_micro_128x64
+  - board: nice_nano_v2
+    shield: corne_right oled_adapter_pro_micro_128x64
+ - board: nice_nano_v2
+    shield: corne_dongle_pro_micro oled_adapter_pro_micro_128x64
