@@ -143,7 +143,7 @@ include:
     snippet: studio-rpc-usb-uart
     # snippet: zmk-usb-logging
   - board: nice_nano_v2
-    shield: corne_dongle_pro_micro dongle_display
+    shield: corne_dongle_pro_micro dongle_display oled_adapter_pro_micro_128x64
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Nice_Dongle_O\"
     artifact-name: nice_corne_dongle_oled
     snippet: studio-rpc-usb-uart
@@ -287,9 +287,4 @@ include:
     shield: settings_reset
     artifact-name: puchi_settings_reset
   ### SETTINGS_RESET END ###
-  - board: nice_nano_v2
-    shield: corne_left oled_adapter_pro_micro_128x64
-  - board: nice_nano_v2
-    shield: corne_right oled_adapter_pro_micro_128x64
- - board: nice_nano_v2
-    shield: corne_dongle_pro_micro oled_adapter_pro_micro_128x64
+
