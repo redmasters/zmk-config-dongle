@@ -29,5 +29,9 @@ manifest:
     - name: zmk-oled-adapter
       remote: mctechnology17
       revision: main
+
+  - board: nice_nano_v2
+    shield: corne_left oled_adapter_pro_micro_128x64
+
   self:
     path: config
