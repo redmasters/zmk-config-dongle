@@ -1,7 +1,7 @@
 # configuration for https://github.com/caksoylar/keymap-drawer
 draw_config:
   footer_text: 'Keymap View: <a href="https://github.com/caksoylar/keymap-drawer">keymap-drawer</a>'
-  # dark_mode: auto
+  dark_mode: true
   n_columns: 1
   # draw_key_sides: true # draw a square in the middle of the keys
   key_w: 60.0
@@ -22,11 +22,53 @@ draw_config:
   svg_extra_style: |
     /* For default sytles, see https://github.com/caksoylar/keymap-drawer/blob/main/keymap_drawer/config.py#L85 */
 
+    /* Dark theme override */
     svg.keymap {
       font-family: Ubuntu Mono, Inconsolata, Consolas, Liberation Mono, Menlo, monospace;
       font-size: 16px;
       font-weight: bold;
       text-rendering: optimizeLegibility;
+      fill: #ffffff !important;
+    }
+
+    /* Dark background */
+    svg.keymap > rect:first-child {
+      fill: #1a1a1a !important;
+    }
+
+    /* Dark theme key styling */
+    rect.key {
+      fill: #2d2d2d !important;
+      stroke: #555555 !important;
+    }
+    
+    rect.combo, rect.combo-separate {
+      fill: #003366 !important;
+      stroke: #4a90e2 !important;
+    }
+    
+    /* Dark theme held keys */
+    rect.held, rect.combo.held {
+      fill: #8B0000 !important;
+    }
+    
+    /* Dark theme text styling */
+    text.label {
+      fill: #ffffff !important;
+      stroke: #1a1a1a !important;
+      stroke-width: 3;
+      paint-order: stroke;
+    }
+    
+    text.footer {
+      fill: #ffffff !important;
+      stroke: #1a1a1a !important;
+      stroke-width: 3;
+      paint-order: stroke;
+    }
+    
+    text {
+      fill: #ffffff !important;
     }
 
     /* Color accent for held keys
