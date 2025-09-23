@@ -4,6 +4,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 #include <layouts/foostan/corne/5column.dtsi>
 #include <layouts/foostan/corne/6column.dtsi>
@@ -57,11 +58,29 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 
 // --------- SH1106 128x64 OLED ON NRF52840 I2C1 ---------
 
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+        };
+    };
+
+    i2c1_sleep: i2c1_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+            low-power-enable;
+        };
+    };
+};
+
 &i2c1 {
-    compatible = "nordic,nrf-twi";
+    compatible = "nordic,nrf-twim";
     status = "okay";
-    sda-pin = <17>;
-    scl-pin = <20>;
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
 
     oled: sh1106@3c {
         compatible = "sinowealth,sh1106";
