@@ -141,6 +141,8 @@ uf2_copy_nice_corne_left_peripheral_oled=/zmk/build/zephyr/zmk.uf2 \
 				    firmware/nice_corne_left_peripheral.uf2
 uf2_copy_nice_corne_dongle_pro_micro=/zmk/build/zephyr/zmk.uf2 \
 				    firmware/nice_corne_dongle_pro_micro.uf2
+uf2_copy_nice_corne_dongle_sh1106=/zmk/build/zephyr/zmk.uf2 \
+				    firmware/nice_corne_dongle_sh1106.uf2
 uf2_copy_nice_corne_dongle_pro_micro_dongle_display=/zmk/build/zephyr/zmk.uf2 \
 				    firmware/nice_corne_dongle_pro_micro_dongle_display.uf2
 uf2_copy_xiao_corne_dongle_xiao=/zmk/build/zephyr/zmk.uf2 \
@@ -168,6 +170,7 @@ uf2_chmod_nice_corne_right=chmod go+wrx firmware/nice_corne_right.uf2
 uf2_chmod_nice_corne_left_peripheral_view=chmod go+wrx firmware/nice_corne_left_peripheral.uf2
 uf2_chmod_nice_corne_left_peripheral_oled=chmod go+wrx firmware/nice_corne_left_peripheral.uf2
 uf2_chmod_nice_corne_dongle_pro_micro=chmod go+wrx firmware/nice_corne_dongle_pro_micro.uf2
+uf2_chmod_nice_corne_dongle_sh1106=chmod go+wrx firmware/nice_corne_dongle_sh1106.uf2
 uf2_chmod_nice_corne_dongle_pro_micro_dongle_display=chmod go+wrx firmware/nice_corne_dongle_pro_micro_dongle_display.uf2
 uf2_chmod_xiao_corne_dongle_xiao=chmod go+wrx firmware/xiao_corne_dongle_xiao.uf2
 uf2_chmod_xiao_corne_settings_reset=chmod go+wrx \
@@ -274,6 +277,11 @@ only_corne_dongle_pro_micro_urob:
 		${west_built_puchi} ${shield_corne_dongle_pro_micro} ${extra_modules}
 	docker cp ${urob}:${uf2_copy_puchi_corne_dongle_pro_micro}
 	${uf2_chmod_puchi_corne_dongle_pro_micro}
+only_nice_corne_dongle_sh1106_urob:
+	docker run --rm ${docker_opts} \
+		${west_built_nice} ${shield_corne_dongle_pro_micro} ${extra_modules}
+	docker cp ${urob}:${uf2_copy_nice_corne_dongle_sh1106}
+	${uf2_chmod_nice_corne_dongle_sh1106}
 only_corne_xiao_corne_dongle_xiao_urob:
 	docker run --rm ${docker_opts} \
 		${west_built_xiao} ${shield_xiao_corne_dongle_xiao} ${extra_modules}
@@ -313,6 +321,60 @@ corne_urob: only_corne_left_view_urob \
 	settings_reset_urob
 ### CODEBASE_UROB END
 
+### SIMPLIFIED BUILD TARGETS
+help:
+	@echo "Corne handwired with nice!nano v2 and SH1106 OLED dongle"
+	@echo ""
+	@echo "Usage:"
+	@echo "  make codebase_urob    - Setup urob ZMK codebase"
+	@echo "  make corne_all        - Build all Corne firmware"
+	@echo "  make left             - Build left half firmware"
+	@echo "  make right            - Build right half firmware"
+	@echo "  make dongle           - Build dongle firmware with SH1106 OLED"
+	@echo "  make settings_reset   - Build settings reset firmware"
+	@echo "  make clean            - Clean build artifacts"
+
+corne_all: left right dongle
+
+left:
+	@echo "Building Corne left half..."
+	docker run --rm ${docker_opts} \
+		${west_built_nice} ${shield_corne_left} ${extra_modules}
+	docker cp ${urob}:${uf2_copy_nice_corne_left}
+	${uf2_chmod_nice_corne_left}
+
+right:
+	@echo "Building Corne right half..."
+	docker run --rm ${docker_opts} \
+		${west_built_nice} ${shield_corne_right} ${extra_modules}
+	docker cp ${urob}:${uf2_copy_nice_corne_right}
+	${uf2_chmod_nice_corne_right}
+
+dongle:
+	@echo "Building Corne dongle with SH1106 OLED (SDA=P0.17, SCL=P0.20)..."
+	docker run --rm ${docker_opts} \
+		${west_built_nice} ${shield_corne_dongle_pro_micro} ${extra_modules}
+	docker cp ${urob}:${uf2_copy_nice_corne_dongle_sh1106}
+	${uf2_chmod_nice_corne_dongle_sh1106}
+
+settings_reset:
+	@echo "Building settings reset firmware..."
+	docker run --rm ${docker_opts} \
+		${west_built_nice} ${shield_settings_reset}
+	docker cp ${urob}:${uf2_copy_nice_corne_settings_reset}
+	${uf2_chmod_nice_corne_settings_reset}
+
+clean:
+	@echo "Cleaning build artifacts..."
+	rm -f firmware/*.uf2
+	docker volume rm zmk-root-* 2>/dev/null || true
+
+clean_zmk:
+	if [ -d zmk ]; then rm -rfv zmk; fi
+
+clean_all: clean_zmk clean
+	@echo "cleaning all"
+
 # Open a shell within the ZMK environment
 shell:
 	docker run --rm ${docker_opts} /bin/bash
@@ -340,15 +402,5 @@ puchi_corne_flash_right:
 
 clean_firmware:
 	find firmware/*.uf2 -type f -delete
-
-clean_zmk:
-	if [ -d zmk ]; then rm -rfv zmk; fi
-
-clean: clean_zmk
-	docker ps -aq --filter name='^zmk' | xargs -r docker container rm
-	docker volume list -q --filter name='zmk' | xargs -r docker volume rm
-
-clean_all: clean clean_firmware
-	@echo "cleaning all"
 
 # vim: set ft=make fdm=marker:
